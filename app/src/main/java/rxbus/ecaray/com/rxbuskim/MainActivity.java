@@ -69,10 +69,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d("tagutil", "收到的参数: " + content);
     }
 
-
-
-
-
     @RxBusReact()
     public void showContent() {
         Log.d("tagutil", "收到的参数为空: ");
