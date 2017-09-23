@@ -14,6 +14,7 @@ public class RxBusEvent<T> {
 
     public RxBusEvent(Object[] obj, String tag) {
         this.tag = tag;
+        if(obj==null) obj=new Object[]{};
         this.obj = obj;
         if (obj == null || obj.length == 0) {
             clazz = new Class[]{};

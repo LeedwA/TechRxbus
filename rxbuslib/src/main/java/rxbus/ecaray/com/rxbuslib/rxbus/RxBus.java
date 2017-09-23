@@ -56,9 +56,9 @@ public class RxBus {
             mSubject.onNext(new RxBusEvent(new Object[]{}, tag));
         }
     }
+
     /**
      * 发送空的事件  tag为默认tag
-     *
      */
     public void post() {
         if (mSubject != null) {
@@ -100,7 +100,7 @@ public class RxBus {
     }
 
     public void post(Object event, String tag) {
-        if(this.mSubject != null) {
+        if (this.mSubject != null) {
             Object[] objs = new Object[]{event};
             this.mSubject.onNext(new RxBusEvent(objs, tag));
         }
@@ -175,8 +175,7 @@ public class RxBus {
                             @Override
                             public void call(RxBusEvent rxBusType) {
                                 try {
-
-                                    method.invoke(object, rxBusType.getObj()[0]);
+                                    method.invoke(object, rxBusType.getObj());
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -195,7 +194,7 @@ public class RxBus {
      * @param object
      */
     @SuppressLint("NewApi")
-    public void register(final Object object,boolean isonBackpressureLatest) {
+    public void register(final Object object, boolean isonBackpressureLatest) {
         CompositeSubscription subscriptions = new CompositeSubscription();
         for (final Method method : object.getClass().getDeclaredMethods()) {
             RxBusReact accept = method.getAnnotation(RxBusReact.class);
@@ -205,7 +204,7 @@ public class RxBus {
                 Scheduler observeScheduler = RxBusScheduler.getScheduler(accept.observeOn());
                 Scheduler subscribeScheduler = RxBusScheduler.getScheduler(accept.subscribeOn());
                 Observable<RxBusEvent> observable = getObservable();
-                if(isonBackpressureLatest){
+                if (isonBackpressureLatest) {
                     observable.onBackpressureLatest();
                 }
                 Subscription subscription = observable

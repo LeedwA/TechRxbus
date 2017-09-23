@@ -55,18 +55,18 @@ public class MainActivity extends AppCompatActivity {
 
     @RxBusReact(clazz = {String.class, Integer.class})
     public void showContent4(String content, int i) {
-        Log.d("tagutil", "收到的参数: " + content);
+        Log.d("tagutil", "收到的参数: " + content+i);
     }
     @RxBusReact(clazz = {String.class, String.class, String.class}, tag = "tag")
     public void showContent(String content, String k, String test) {
-        Log.d("tagutil", "收到的参数: " + content);
+        Log.d("tagutil", "收到的参数: " +  k+content+test);
     }
 
 
 
     @RxBusReact(clazz = {String.class, Integer.class, Double.class}, tag = "tag")
     public void showContent2(String content, int i, double k) {
-        Log.d("tagutil", "收到的参数: " + content);
+        Log.d("tagutil", "收到的参数: " + k+content+i);
     }
 
     @RxBusReact()
